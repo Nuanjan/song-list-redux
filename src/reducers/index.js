@@ -1,22 +1,29 @@
-import { combineReducers } from 'redux';
+import { SELECT_SONG, ADD_SONG, DELETE_SONG } from "../actions";
 
-const songReducer = () => {
-return [
-    {title: 'No Scrub', duration: '4:05'},
-    {title: ' Macarena', duration: '2:30'},
-    {title: 'Al Star', duration: '3:15'},
-    {title: 'I Want it That Way', duration: '1:45'}
-];
+const initialState = {
+  songs: [],
+  selectedSong: null,
+  deletedSong: null,
 };
 
-const selectedSongReducer = (selectedSong = null, action) => {
-if(action.type === 'SONG_SELECTED') {
-    return action.payload;
-}
-return selectedSong;
-};
+const reducer = (state = initialState, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case SELECT_SONG:
+      return { ...state, selectedSong: payload };
+    case ADD_SONG:
+      return { ...state, songs: [...state.songs, payload] };
 
-export default combineReducers({
-    songs: songReducer,
-    selectedSong: selectedSongReducer
-});
+    //   const newSongs = [...state.songs].push(action.payload);
+    //    OR newSongs.push(action.payload);
+    //   const newState = { ...state, songs: newSongs};
+    case DELETE_SONG:
+      const newSongList = [...state.songs].filter(
+        (song) => song !== action.payload
+      );
+      return { ...state, songs: newSongList };
+    default:
+      return state;
+  }
+};
+export default reducer;
