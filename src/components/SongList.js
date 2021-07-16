@@ -35,25 +35,31 @@ const SongList = () => {
   // const { songs, selectMySong } = this.props;
   return (
     <div className="ui divided list">
-      {songs.map((song) => (
-        <div className="item" key={song.title}>
-          <div className="right floated content">
-            <button
-              className="ui button teal"
-              onClick={() => dispatch(selectSong(song))}
-            >
-              Select
-            </button>
-            <button
-              className="ui button red"
-              onClick={() => dispatch(selectSong(song))}
-            >
-              Delete
-            </button>
-          </div>
-          <div className="content">{song.title}</div>
+      {!songs ? (
+        <div>No song to Show!</div>
+      ) : (
+        <div>
+          {songs.map((song) => (
+            <div className="item" key={song.title}>
+              <div className="right floated content">
+                <button
+                  className="ui button teal"
+                  onClick={() => dispatch(selectSong(song))}
+                >
+                  Select
+                </button>
+                <button
+                  className="ui button red"
+                  onClick={() => dispatch(selectSong(song))}
+                >
+                  Delete
+                </button>
+              </div>
+              <div className="content">{song.title}</div>
+            </div>
+          ))}
         </div>
-      ))}
+      )}
     </div>
   );
 };
