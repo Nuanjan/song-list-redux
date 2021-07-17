@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-// import { connect } from "react-redux";
-import { selectSong } from "../actions";
+import { connect } from "react-redux";
+import { selectSong, deleteSong } from "../actions";
 import { useSelector, useDispatch } from "react-redux";
 
 // class SongList extends Component {
@@ -29,7 +29,7 @@ import { useSelector, useDispatch } from "react-redux";
 //   }
 // }
 
-const SongList = () => {
+const SongList = (props) => {
   const songs = useSelector((state) => state.songs);
   const dispatch = useDispatch();
   // const { songs, selectMySong } = this.props;
@@ -50,7 +50,7 @@ const SongList = () => {
                 </button>
                 <button
                   className="ui button red"
-                  onClick={() => dispatch(selectSong(song))}
+                  onClick={() => props.deleteSongAction(song.id)}
                 >
                   Delete
                 </button>
@@ -73,4 +73,4 @@ const SongList = () => {
 // };
 // export default connect(mapStateToProps, { selectMySong: selectSong })(SongList);
 
-export default SongList;
+export default connect(null, { deleteSongAction: deleteSong })(SongList);

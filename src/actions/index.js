@@ -16,9 +16,9 @@ export const addSong = (song) => {
   };
 };
 
-export const deleteSong = (song) => {
+export const deleteSong = (songId) => {
   return {
     type: DELETE_SONG,
-    payload: song,
+    payload: songId,
   };
 };
